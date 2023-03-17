@@ -1,0 +1,9 @@
+head 
+    script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    script src="/js/countdown.js"
+body.promptScreen
+    h2.deadline#countdown DEADLINE...
+    - if session[:loggedin] == true
+        a.prompt href="/doodles/new" ##{session[:prompt]}
+    - else 
+        h1.prompt ##{session[:prompt]}

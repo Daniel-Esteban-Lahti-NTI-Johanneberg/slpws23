@@ -1,0 +1,28 @@
+html lang="en"
+  head
+    meta charset="UTF-8"/
+    meta name="viewport" content="width=device-width, initial-scale=1.0"/
+    meta http-equiv="X-UA-Compatible" content="ie=edge"/
+    link rel="stylesheet" href="/css/styleDD.css"/
+    title Daily Doodle
+    header
+      - db = getDB()
+      - if session[:loggedin] == true 
+        nav.menu
+          a href="/" Home
+          a href="/calendar" Calendar
+          a href="/login" Following
+          a.loggedin href="/users/#{session[:username]}" Logged in as #{session[:username]}
+          form action="/logout" method="POST"
+            input type="hidden" name="extra_submit_param" value="extra_submit_value"
+            button type="submit" name="submit_param" value="submit_value" class="logoutButton" log out
+          - if session[:id] == 1
+            form action="/prompts/update" method="POST"
+              input.adminUpdatePrompt type="hidden" name="extra_submit_param" value="extra_submit_value"
+              button.adminUpdatePrompt type="submit" name="submit_param" value="submit_value" class="logoutButton" Change Prompt (Admin Only)
+          / a href="/global" Top 
+      - else 
+        nav.logregister
+          a href="/showlogin" Log in
+          a href="/users/new" Register
+    ==yield

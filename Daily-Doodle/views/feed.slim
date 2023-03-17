@@ -1,0 +1,46 @@
+head 
+    script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    script src="/js/countdown.js"
+body.feedBody
+    div.feedHeader
+        h1.feedPrompt ##{session[:prompt]}
+        h1.feedDeadline#countdown DEADLINE
+    - db = getDB()
+    main.feed
+        - doodles.each do | doodle |
+            div.doodleCard
+                div.cardNameAndFollow
+                    a.cardOwner href="/users/#{db.execute('SELECT username FROM users WHERE user_id = ?',doodle["user_id"]).first[0]}" #{db.execute('SELECT username FROM users WHERE user_id = ?',doodle["user_id"]).first[0]}
+                    - if !user_is_following(doodle["user_id"],session[:id])
+                        form action="/follows" method="POST"
+                            input type="hidden" name="followed_user_id" value="#{doodle["user_id"]}"
+                            input.followButton type="submit" value="+"
+                    - else 
+                        form action="/follows/delete" method="POST"
+                            input type="hidden" name="followed_user_id" value="#{doodle["user_id"]}"
+                            input.followingButton type="submit" value="✔"
+                img src=doodle["url"] alt=doodle["prompt"] width="400px" height="400px"
+                div.likeReportContainer
+                    p.likeShower #{db.execute('SELECT COUNT(like_id) FROM likes_rel WHERE doodle_id = ?',doodle["doodle_id"]).first[0]}
+                    - if !user_has_liked(doodle["doodle_id"],session[:id])
+                        form action="/doodles/#{doodle["doodle_id"]}/like" method="POST"
+                            input type="hidden" name="like" value="1"
+                            input.likeButton type="submit" value="♥"
+                    - else 
+                        form action="/doodles/#{doodle["doodle_id"]}/unlike" method="POST"
+                            input type="hidden" name="unlike" value="1"
+                            input.unlikeButton type="submit" value="♥"
+                    - if session[:id] == doodle["user_id"]
+                        form action="/doodles/#{doodle["doodle_id"]}/delete" method="POST"
+                            input type="hidden" name="report" value="#{doodle["doodle_id"]}"
+                            input.doodleDeleteButton type="submit" value="Delete"
+                    - else
+                        form action="/doodles/#{doodle["doodle_id"]}/report" method="POST"
+                            input type="hidden" name="report" value="1"
+                            input.reportButton type="submit" value="❕"
+                    
+
+
+            
+
+

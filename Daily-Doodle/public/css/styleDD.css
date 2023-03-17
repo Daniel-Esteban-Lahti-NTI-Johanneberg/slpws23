@@ -1,0 +1,412 @@
+:root {
+    --magic-number:2vw;
+  }
+  body{
+    overflow-x: hidden;
+  }
+  .adminUpdatePrompt{
+    position:absolute;
+    margin-top:100px !important;
+  }
+  .prompt{
+    display:flex !important;
+    position:fixed;
+    margin-top:-50px;
+    font-size:10em !important;
+    font-weight:700 !important;
+    text-transform:uppercase;
+    background-color:rgba(0, 0, 0, 0);
+  }
+  a.prompt{
+    transition-duration:0.18s;
+    margin-top:-148px;
+  }
+  h1.feedPrompt{
+    font-size:2em !important;
+    font-weight:750 !important;
+    padding:10px;
+    text-transform:uppercase;
+    background-color:white;
+    color:#1da891;
+    margin-left:0;
+    border:white 10px dashed;
+    border-top-left-radius:40px;
+    border-bottom-left-radius:40px;
+  }
+  h1.feedDeadline{
+    font-size:2em !important;
+    font-weight:750 !important;
+    padding:10px;
+    text-transform:lowercase;
+    background-color:#1da891;
+    color:white;
+    margin-left:0;
+    border:#1da891 10px dashed;
+    border-top-right-radius:40px;
+    border-bottom-right-radius:40px;
+  }
+  .deadline{
+    position:fixed;
+    font-size:2em;
+    background-color:rgba(0, 0, 0, 0);
+    margin-top:40px;
+  }
+  body{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    align-items:center;
+    margin:0;
+    /* background: rgb(246, 223, 174); */
+    /* background: linear-gradient(90deg, rgb(192, 236, 153) 0%, rgb(255, 215, 121) 50%, rgb(129, 235, 233) 100%); */
+    background: 
+    radial-gradient(circle,#15ffad,#14d9b3),
+    radial-gradient(circle at top left, #6200ea, #18fffb);
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:500;
+    color:white;
+    position:relative;
+  }
+  nav.logregister {
+    height:50px;
+    background:rgba(255, 255, 255, 0);
+    display:flex;
+    justify-content:space-around;
+    align-items:right;
+  }
+  .logoutButton {
+    position:fixed;
+    left:10px;
+    top:24px;
+    color:#16cdca;
+    font-size:1rem;
+    padding:3px;
+    border-bottom-left-radius:10px;
+    border-top-right-radius:10px;
+    background-color:white;
+    border-color:white;
+    border-style:solid;
+    margin-top:48px;
+    margin-left:10px;
+  }
+  a.loggedin {
+    position:fixed;
+    left:10px;
+  }
+  .loginDiv{
+    margin-top:300px;
+    height:40vh;
+    width:20vw;
+  }
+  input.input{
+    filter:drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+    border-top-left-radius:15px;
+    border-bottom-right-radius:15px;
+    width: 100%;
+    height:15%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-style:solid;
+    border-color:white;
+    color:#0f9277;
+    font-size:2rem;
+  }
+  input.submit{
+    transition-duration:0.18s;
+    padding:10px 30px 10px 30px;
+    filter:drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+    border-style:double;
+    border:none;
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
+    color:white;
+    font-weight:900;
+    font-size:2rem;
+    justify-self:center;
+    background:#076f68;;
+  }
+  body.uploadBody p{
+    color:#e4fff7;
+    display:flex;
+    flex-direction:column;
+    text-shadow:#076f68 2px 2px 10px;
+    font-weight:0;
+    font-size:2rem;
+    margin-top:20px;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  .upload{
+    transition-duration:0.18s;
+    background-color:#076f68;
+    color: white;
+    border:none;
+    width:200px;
+    margin:50px;
+    padding: 0.5rem;
+    font-size:2rem;
+    padding:25px;
+    font-family: sans-serif;
+    border-radius: 100rem;
+    text-transform:uppercase;
+    cursor: pointer;
+    margin-top: 300px;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+    input:hover{
+      color:#076f68;
+      background-color:white;
+    }
+  .uploadLabel{
+    transition-duration:0.18s;
+    background-color:#076f68;
+    color: white;
+    border:none;
+    width:200px;
+    margin:50px;
+    padding: 0.5rem;
+    font-size:2rem;
+    padding:25px;
+    font-family: sans-serif;
+    border-radius: 100rem;
+    text-transform:uppercase;
+    cursor: pointer;
+    margin-top: 300px;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+    .uploadLabel:hover{
+      color:#076f68;
+      background-color:white;
+    }
+  .link-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: serif;
+  }
+  .link-button:focus {
+    outline: none;
+  }
+  .link-button:active {
+    color:red;
+  }
+header{
+  display:flex;
+  flex-direction:row-reverse;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
+
+  filter:drop-shadow(teal);
+  width:100%;
+  background-color: #14d9b3;
+  background-image: radial-gradient(#85e5c0 2px, #14d9b3 2px);
+  background-size: 50px 50px;
+}
+  nav.menu {
+    width:50%;
+    height:100px;
+    display:flex;
+    justify-content: space-around;
+    align-items:center;
+  }
+  
+    a, a:link, a:visited {
+      color:white;
+      text-decoration:none;
+      text-transform:uppercase;
+      font-size:1.2em;
+      font-weight:900;
+    }
+
+    a:hover{
+      color:#0f9277;
+    }
+   
+  h1 {
+    display:flex;
+  }
+  
+  a, form {
+    display:inline-block;
+    margin:10px;
+  }
+div.feedHeader{
+  display:flex;
+  flex-direction:row;
+  margin-top:100px;
+  filter:drop-shadow(0 4px 10px rgba(0, 46, 57, 0.3));
+}
+
+main.feed{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    margin-left:8%;
+    width:100vw;
+  }
+    div.doodleCard{
+      width:400px;
+      margin-top:10px;
+      margin-left:20px;
+      margin-right:20px;
+      filter:drop-shadow(0 4px 5px rgba(0, 46, 57, 0.3));
+    }
+      div.cardNameAndFollow{
+        height:25px;
+        width:50%;
+        display:flex;
+        flex-direction:row;
+        align-content:space-between;
+        justify-content:flex-start;
+        color:#14d9b3;
+        padding-left:20px;
+      }
+        a.cardOwner{
+          color:#00c08a;
+          height:100%;
+          margin-left:-20px;
+          padding-left:20px;
+          padding-right:20px;
+          padding-bottom:0px;
+          padding-top:2px;
+          font-family:Arial, Helvetica, sans-serif;
+          text-transform:uppercase;
+          font-weight:700;
+          margin-top:0px;
+          margin-right:0;
+          background-color:white;
+          border-top-left-radius:10px;
+          text-align:center;
+        }
+      input.followButton{
+        height:25px;
+        width:25px;
+        border:none;
+        background-color:#109680;
+        color:rgb(166, 255, 206);
+        font-size:1rem;
+        padding-top:5px;
+        font-weight:750;
+        margin-top:-10px;
+        margin-left:-10px;
+        box-shadow: -10px 0 20px -5px #00000045;
+      }
+      input.followingButton{
+        height:25px;
+        width:25px;
+        border:none;
+        background-color:#c800ff;
+        color:#e3c5ff;
+        margin-top:-10px;
+        margin-left:-10px;
+        font-size:1rem;
+        padding:0;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 20px -12px inset,
+      }
+      div.likeReportContainer{
+        display:flex;
+        flex-direction:row-reverse;
+        height:60px;
+        margin-top:-10px;
+      }
+        p.likeShower{
+          color:#00c08a;
+          height:25px;
+          margin-right:6px;
+          margin-left:-15px;
+        }
+        input.likeButton,input.unlikeButton{
+          margin-right:-10px;
+          height:60px;
+          width:60px;
+          border:none;
+          font-size:3rem;
+          text-align:center;
+          border-bottom-left-radius:30px;
+          border-bottom-right-radius:30px;
+          background-color:rgb(255, 255, 255);
+        }
+        input.likeButton{
+          color:#00c08a;
+        }
+        input.unlikeButton{
+          color:rgb(255, 52, 86);
+        }
+        input.reportButton{
+          opacity:0;
+          transition-duration:0.3s;
+          margin-right:280px;
+          position:relative;
+          height:0px;
+          width:40px;
+          border:none;
+          color:rgb(102, 0, 0);
+          font-size:1.5rem;
+          border-bottom-left-radius:20px;
+          border-bottom-right-radius:20px;
+          background-color:rgb(235, 43, 82);
+        }
+          .doodleCard:hover input.reportButton{
+            opacity:1;
+            height:40px;
+            transition-duration:0.3s;
+          }
+        input.doodleDeleteButton{
+          margin-right:-19px;
+          height:40px;
+          padding-right:10px;
+          padding-left:10px;
+          border-bottom-left-radius:20px;
+          border-bottom-right-radius:20px;
+          background-color:rgb(35, 93, 195);
+          color:rgb(58, 255, 248);
+          border:none;
+          font-weight:900;
+          text-transform:uppercase;
+        }
+      div.doodleCard img{
+        /* padding:8px; */
+        /* border:white solid 1px; */
+        background-color:whitesmoke;
+        border-top-right-radius:30px;
+        /* box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; */
+      }
+
+body.uploadBody{
+  background-color: #14d9b3;
+  opacity: 1;
+  background-image:  linear-gradient(#85e5c0 2.8000000000000003px, transparent 2.8000000000000003px), linear-gradient(90deg, #85e5c0 2.8000000000000003px, transparent 2.8000000000000003px), linear-gradient(#85e5c0 1.4000000000000001px, transparent 1.4000000000000001px), linear-gradient(90deg, #85e5c0 1.4000000000000001px, #14d9b3 1.4000000000000001px);
+  background-size: 70px 70px, 70px 70px, 14px 14px, 14px 14px;
+  background-position: -2.8000000000000003px -2.8000000000000003px, -2.8000000000000003px -2.8000000000000003px, -1.4000000000000001px -1.4000000000000001px, -1.4000000000000001px -1.4000000000000001px;
+}
+body.loginBody{
+  background-color: #14d9b3;
+  opacity: 1;
+  background-image:  repeating-linear-gradient(45deg, #85e5c0 25%, transparent 25%, transparent 75%, #85e5c0 75%, #85e5c0), repeating-linear-gradient(45deg, #85e5c0 25%, #14d9b3 25%, #14d9b3 75%, #85e5c0 75%, #85e5c0);
+  background-position: 0 0, 40px 40px;
+  background-size: 80px 80px;
+}
+body.feedBody{
+  background-color: #14d9b3;
+  opacity: 1;
+  background-image:  linear-gradient(30deg, #85e5c0 12%, transparent 12.5%, transparent 87%, #85e5c0 87.5%, #85e5c0), linear-gradient(150deg, #85e5c0 12%, transparent 12.5%, transparent 87%, #85e5c0 87.5%, #85e5c0), linear-gradient(30deg, #85e5c0 12%, transparent 12.5%, transparent 87%, #85e5c0 87.5%, #85e5c0), linear-gradient(150deg, #85e5c0 12%, transparent 12.5%, transparent 87%, #85e5c0 87.5%, #85e5c0), linear-gradient(60deg, #85e5c077 25%, transparent 25.5%, transparent 75%, #85e5c077 75%, #85e5c077), linear-gradient(60deg, #85e5c077 25%, transparent 25.5%, transparent 75%, #85e5c077 75%, #85e5c077);
+  background-size: 80px 140px;
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+}
+body.registerBody{
+  background-color: #14d9b3;
+  opacity: 1;
+  background-image:  linear-gradient(135deg, #85e5c0 25%, transparent 25%), linear-gradient(225deg, #85e5c0 25%, transparent 25%), linear-gradient(45deg, #85e5c0 25%, transparent 25%), linear-gradient(315deg, #85e5c0 25%, #14d9b3 25%);
+  background-position:  40px 0, 40px 0, 0 0, 0 0;
+  background-size: 80px 80px;
+  background-repeat: repeat;
+}
+
+  
+  
+  
+  
+  

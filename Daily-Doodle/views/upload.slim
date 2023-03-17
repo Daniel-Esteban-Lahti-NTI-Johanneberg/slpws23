@@ -1,0 +1,6 @@
+body.uploadBody
+    form action="/doodles" method="POST" enctype="multipart/form-data"
+        label.uploadLabel for="uploadBtn" Choose File
+        input.upload id="uploadBtn" type="file" name="image" hidden=""
+        input.upload type="submit" value="Upload"
+    p Recommended size: 1080 x 1080 pixels

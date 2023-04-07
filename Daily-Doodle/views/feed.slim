@@ -30,7 +30,7 @@ body.feedBody
                         form action="/doodles/#{doodle["doodle_id"]}/unlike" method="POST"
                             input type="hidden" name="unlike" value="1"
                             input.unlikeButton type="submit" value="♥"
-                    - if session[:id] == doodle["user_id"]
+                    - if session[:id] == doodle["user_id"] || session[:id] == 1
                         form action="/doodles/#{doodle["doodle_id"]}/delete" method="POST"
                             input type="hidden" name="report" value="#{doodle["doodle_id"]}"
                             input.doodleDeleteButton type="submit" value="Delete"

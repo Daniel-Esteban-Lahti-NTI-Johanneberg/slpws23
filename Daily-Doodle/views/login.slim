@@ -1,4 +1,6 @@
 body.loginBody
+    -if login_message != "" && login_message != nil
+        p.loginMessage #{login_message}
     div class="loginDiv"
         form action="/login" method="POST"
             input type="text" name="username" placeholder="Username" class="input"

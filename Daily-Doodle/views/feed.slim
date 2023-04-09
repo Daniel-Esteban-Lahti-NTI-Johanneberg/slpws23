@@ -36,7 +36,7 @@ body.feedBody
                             input.doodleDeleteButton type="submit" value="Delete"
                     - else
                         form action="/doodles/#{doodle["doodle_id"]}/report" method="POST"
-                            input type="hidden" name="report" value="1"
+                            input type="hidden" name="report" value="#{doodle["doodle_id"]}"
                             input.reportButton type="submit" value="❕"
                     
 

@@ -1,18 +1,17 @@
-- name = username.upcase
-h1 #{name}'s profile
-
 - db = getDB()
-main.doodlesAndFriends 
-    content.profileDoodles
-        p #{name}'s doodles
-        - doodles.each do | doodle |
-            div.doodleCard
-                div.cardNameAndFollow
-                    a.cardOwner ##{doodle["prompt"]}
-                img src=doodle["url"] alt=doodle["prompt"] width="400px" height="400px"
-                div.likeReportContainer
-    content.profileFriends
-        p #{name} is following 
-        - friends.each do | friend |
-            a href="/users/#{db.execute('SELECT username FROM users WHERE user_id = ?',friend["followed_user_id"]).first[0]}" #{db.execute('SELECT username FROM users WHERE user_id = ?',friend["followed_user_id"]).first[0]}
-        
+body.profileBody
+    - name = username.upcase
+    h1 #{name}'s profile
+    main.doodlesAndFriends
+        content.profileDoodles
+            - doodles.each do | doodle |
+                div.doodleCard
+                    div.cardNameAndFollow
+                        a.cardOwner ##{doodle["prompt"]}
+                    img.profileDoodle src=doodle["url"] alt=doodle["prompt"] width="300px" height="300px"
+                    p.profileLikeCounter ♥ #{db.execute('SELECT COUNT(like_id) FROM likes_rel WHERE doodle_id = ?',doodle["doodle_id"]).first[0]}
+        content.profileFriends
+            p.profileIsFollowing #{name} is following...
+            - friends.each do | friend |
+                a href="/users/#{db.execute('SELECT username FROM users WHERE user_id = ?',friend["followed_user_id"]).first[0]}" 🗿 #{db.execute('SELECT username FROM users WHERE user_id = ?',friend["followed_user_id"]).first[0]}
+            

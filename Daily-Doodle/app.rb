@@ -3,6 +3,7 @@ require 'sinatra/reloader'
 require 'slim'
 require 'sqlite3'
 require 'bcrypt'
+require 'time'
 require_relative './model.rb'
 
 include Model
@@ -56,6 +57,10 @@ get('/') do
   end
 end
 
+get('/following') do
+  slim(:following)
+end
+
 # Updates the current prompt of the day (Note: 1 and 0 are used instead of true and false as booleans aren't inherent in SQLite)
 #
 # @see Model#update_prompt
@@ -66,7 +71,7 @@ end
 # Displays a login form
 #
 get('/login') do
-  slim(:login)
+  slim(:login, locals:{login_message:session[:login_message]})
 end
 
 # Attempts login and updates the session(s) 
@@ -80,17 +85,42 @@ end
 post('/login') do
   username = params[:username]
   password = params[:password]
-  result = db.execute('SELECT * FROM users WHERE username = ?', username).first
+  result = db.execute('SELECT * FROM users WHERE username = ?',username).first
   password_digest = result['password_digest']
   id = result['user_id'].to_i
   
   if BCrypt::Password.new(password_digest) == password
+    attempts = db.execute('SELECT login_attempts FROM users WHERE username = ?',username).first[0]
+    if attempts != nil && attempts >= 4
+      lockout_time = Time.parse(db.execute('SELECT lockout_time FROM users WHERE username = ?',username).first[0])
+      current_time = Time.now
+      elapsed_time = current_time - lockout_time
+      if elapsed_time <= 60
+        session[:login_message] = "Locked Out For #{(60 - elapsed_time).to_i} Seconds"
+        redirect('/login')
+      end
+    end
+    session[:login_message] = ''
     session[:id] = id
     session[:username] = username
     session[:loggedin] = true
+    update_login_attempts(username,0)
     redirect('/')
   else
-    "Username-Password Combination Does Not Exist"
+    if user_exists(username)
+      attempts = db.execute('SELECT login_attempts FROM users WHERE username = ?',username).first[0] + 1
+      update_login_attempts(username,attempts)
+      if attempts >= 4
+        lockout_time = Time.now.to_s
+        update_lockout_time(username,lockout_time)
+        session[:login_message] = 'Too Many Recent Failed Login Attempts, Try Again Later'
+      else
+        session[:login_message] = 'Username-Password Combination Does Not Exist'
+      end
+    else
+      session[:login_message] = 'User Does Not Exist'
+    end
+    redirect('/login')
   end
 end
 
@@ -219,8 +249,11 @@ end
 #
 # @param [Integer] :doodle_id, The id of the reported doodle
 post('/doodles/:doodle_id/report') do
-  doodle_id = params[:doodle_id]
-  redirect('/')
+  doodle_id = params[:doodle_id].to_i
+  user_id = session[:id]
+  if session[:loggedin]
+    report(doodle_id,user_id)
+  end
 end
 
 # Route for debugging countdown timer and current prompt of the day
@@ -230,9 +263,3 @@ get('/countdown') do
   session[:prompt] = db.execute('SELECT prompt_name FROM prompts WHERE current_prompt = 1').first[0].to_s
   slim(:prompt)
 end
-
-#kunna ta bort allt en användare har (typ id vid flera tabeller)
-#On-delete cascade
-#Säkra upp routes
-#Validering
-#REST/model

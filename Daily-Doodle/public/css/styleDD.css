@@ -2,7 +2,14 @@
     --magic-number:2vw;
   }
   body{
-    overflow-x: hidden;
+    overflow-x:hidden;
+    overflow-y:visible;
+  }
+  .stickyHeader{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:9999;
   }
   .adminUpdatePrompt{
     position:absolute;
@@ -72,6 +79,7 @@
     background:rgba(255, 255, 255, 0);
     display:flex;
     justify-content:space-around;
+
     align-items:right;
   }
   .logoutButton {
@@ -92,6 +100,18 @@
   a.loggedin {
     position:fixed;
     left:10px;
+  }
+  .loginMessage{
+    position:fixed;
+    font-weight:750;
+    top:213px;
+    color:white;
+    padding:4px;
+    padding-left:7px;
+    padding-right:7px;
+    background-color:rgb(255, 52, 86);
+    font-size:1.7rem;
+    filter:drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
   }
   .loginDiv{
     margin-top:300px;
@@ -208,7 +228,8 @@ header{
     width:50%;
     height:100px;
     display:flex;
-    justify-content: space-around;
+    justify-content:space-around;
+    flex-direction:row-reverse;
     align-items:center;
   }
   
@@ -319,7 +340,7 @@ main.feed{
           margin-left:-15px;
         }
         input.likeButton,input.unlikeButton{
-          margin-right:-10px;
+          margin-right:-9px;
           height:60px;
           width:60px;
           border:none;
@@ -376,31 +397,63 @@ main.feed{
       }
   .doodlesAndFriends{
     display:flex;
+    width:90%;
     flex-direction:row;
+    justify-content:space-between;
   }
+    .profileDoodles{
+      display:flex;
+      width:100%;
+      flex-direction:row;
+      flex-wrap:wrap;
+    }
+    .profileIsFollowing{
+      font-weight:900;
+      font-style:italic;
+    }
+    .profileFriends{
+      display:flex;
+      flex-direction:column;
+      width:20%;
+      margin-right:50px;
+      padding-left:50px;
+      border-left:rgb(225, 255, 230) 2px solid;
+    }
+    .profileLikeCounter{
+      background-color:whitesmoke;
+      margin-top:0px;
+      color:rgb(235, 43, 82);
+      padding:5px;
+      padding-left:10px;
+      width:30px;
+      border-bottom-right-radius:7px;
+      border-bottom-left-radius:7px;
+    }
 
-body.uploadBody{
+.uploadBody{
+  margin-top:100px;
   background-color: #14d9b3;
-  opacity: 1;
+  opacity:1;
   background-image:  linear-gradient(#85e5c0 2.8000000000000003px, transparent 2.8000000000000003px), linear-gradient(90deg, #85e5c0 2.8000000000000003px, transparent 2.8000000000000003px), linear-gradient(#85e5c0 1.4000000000000001px, transparent 1.4000000000000001px), linear-gradient(90deg, #85e5c0 1.4000000000000001px, #14d9b3 1.4000000000000001px);
   background-size: 70px 70px, 70px 70px, 14px 14px, 14px 14px;
   background-position: -2.8000000000000003px -2.8000000000000003px, -2.8000000000000003px -2.8000000000000003px, -1.4000000000000001px -1.4000000000000001px, -1.4000000000000001px -1.4000000000000001px;
 }
-body.loginBody{
+.loginBody{
   background-color: #14d9b3;
   opacity: 1;
   background-image:  repeating-linear-gradient(45deg, #85e5c0 25%, transparent 25%, transparent 75%, #85e5c0 75%, #85e5c0), repeating-linear-gradient(45deg, #85e5c0 25%, #14d9b3 25%, #14d9b3 75%, #85e5c0 75%, #85e5c0);
   background-position: 0 0, 40px 40px;
   background-size: 80px 80px;
 }
-body.feedBody{
+.feedBody{
   background-color: #14d9b3;
   opacity: 1;
   background-image:  linear-gradient(30deg, #85e5c0 12%, transparent 12.5%, transparent 87%, #85e5c0 87.5%, #85e5c0), linear-gradient(150deg, #85e5c0 12%, transparent 12.5%, transparent 87%, #85e5c0 87.5%, #85e5c0), linear-gradient(30deg, #85e5c0 12%, transparent 12.5%, transparent 87%, #85e5c0 87.5%, #85e5c0), linear-gradient(150deg, #85e5c0 12%, transparent 12.5%, transparent 87%, #85e5c0 87.5%, #85e5c0), linear-gradient(60deg, #85e5c077 25%, transparent 25.5%, transparent 75%, #85e5c077 75%, #85e5c077), linear-gradient(60deg, #85e5c077 25%, transparent 25.5%, transparent 75%, #85e5c077 75%, #85e5c077);
   background-size: 80px 140px;
   background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
-body.registerBody{
+.registerBody{
+  margin-top:100px;
   background-color: #14d9b3;
   opacity: 1;
   background-image:  linear-gradient(135deg, #85e5c0 25%, transparent 25%), linear-gradient(225deg, #85e5c0 25%, transparent 25%), linear-gradient(45deg, #85e5c0 25%, transparent 25%), linear-gradient(315deg, #85e5c0 25%, #14d9b3 25%);
@@ -408,7 +461,30 @@ body.registerBody{
   background-size: 80px 80px;
   background-repeat: repeat;
 }
+.profileBody{
+  margin-top:100px;
+}
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1c7154;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:#15ffad;
+  border-radius:5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #d9ffae;
+}
   
   
   

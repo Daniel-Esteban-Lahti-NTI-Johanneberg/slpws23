@@ -20,6 +20,27 @@ module Model
         redirect('/')
     end
 
+    # Checks if a user exists with a certain username
+    #
+    def user_exists(username)
+        db = get_DB()
+        return db.execute('SELECT user_id FROM users WHERE username = ?',username) != nil
+    end
+
+    # Updates the amount of login attempts a user has made
+    #
+    def update_login_attempts(username,attempts)
+        db = get_DB()
+        db.execute('UPDATE users SET login_attempts = ? WHERE username = ?',attempts,username)
+    end
+
+    # Updates the time a user has been locked out of logging in
+    #
+    def update_lockout_time(username,time)
+        db = get_DB()
+        db.execute('UPDATE users SET lockout_time = ? WHERE username = ?',time,username)
+    end
+
     # Clears all user-related sessions
     #
     # @params [Integer] session[:id], The stored id of the current user
@@ -42,7 +63,7 @@ module Model
         if password == password_confirm
             password_digest = BCrypt::Password.create(password)
             db.execute('INSERT INTO users (username,password_digest) VALUES (?,?)',username,password_digest)
-            redirect('/')
+            redirect('/login')
         end  
     end
 
@@ -76,6 +97,19 @@ module Model
         redirect('/')
     end
 
+    # Creates a report (many to many relationship) between a user and a doodle
+    #
+    # @param [Integer] doodle_id, The id of the reported doodle
+    # @param [Integer] user_id, The id of the reporting user
+    def report(doodle_id,user_id)
+        db = get_DB()
+        db.execute('INSERT INTO reports_rel (user_id,doodle_id) VALUES (?,?)',user_id,doodle_id)
+        if db.execute('SELECT COUNT(report_id) FROM reports_rel WHERE doodle_id = ?',doodle_id).first[0] >= 3
+            delete_doodle(doodle_id,1)
+        end
+        redirect('/')
+    end
+
     # Creates a like (many to many relationship) between a user and a doodle
     #
     # @param [Integer] doodle_id, The id of the liked doodle
@@ -96,14 +130,16 @@ module Model
         redirect('/')
     end
 
-    # Checks if the user is eligible for deleting a certain post and then deletes it
+    # Checks if the user is eligible for deleting a certain post and then deletes it (ON-DELETE CASCADE)
     #
     # @param [Integer] doodle_id, The id of the doodle being deleted
     # @param [Integer] user_id, The id of the user attempting to delete the doodle
     def delete_doodle(doodle_id,user_id)
         db = get_DB()
-        if db.execute('SELECT user_id FROM doodles WHERE doodle_id = ?',doodle_id).first[0] == (user_id || 1) #user_id 1 = admin
+        if user_id == db.execute('SELECT user_id FROM doodles WHERE doodle_id = ?',doodle_id).first[0] || user_id == 1 #user_id 1 = admin
             db.execute('DELETE FROM doodles WHERE doodle_id = ?',doodle_id)
+            db.execute('DELETE FROM likes_rel WHERE doodle_id = ?',doodle_id) #CASCADE
+            db.execute('DELETE FROM reports_rel WHERE doodle_id = ?',doodle_id) #CASCADE
         end
         redirect('/')
     end
